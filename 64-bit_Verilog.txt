@@ -1,0 +1,17 @@
+// Below is the Verilog code to add to multiply_v1_0_S00_AXI.v
+reg [0 : C_S_AXI_DATA_WIDTH-1] tmp_reg_high_32;
+reg [0 : C_S_AXI_DATA_WIDTH-1] tmp_reg_low_32;
+always@(posedge S_AXI_ACLK) begin 
+  if(S_AXI_ARESETN == 1'b0) begin 
+    slv_reg2 <= 0;
+    slv_reg3 <= 0;
+    tmp_reg_high_32 <= 0;   
+    tmp_reg_low_32 <= 0;
+  end
+  else begin 
+    tmp_reg_high_32 <= (slv_reg0 * slv_reg1) >>> 32;
+    tmp_reg_low_32 <= slv_reg0 * slv_reg1;
+    slv_reg2 <= tmp_reg_low_32;
+    slv_reg3 <= tmp_reg_high_32;
+  end 
+end 

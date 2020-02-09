@@ -24,11 +24,11 @@ int main()
 
     for(loopCounter; loopCounter < 6; loopCounter++){
         
-        // write to the registers
-    	MULTIPLY_mWriteReg(MULTIPLY_ADDR, REG_1_OFFSET, multiplicant1[loopCounter]);
+	// write to the registers
+	MULTIPLY_mWriteReg(MULTIPLY_ADDR, REG_1_OFFSET, multiplicant1[loopCounter]);
 	MULTIPLY_mWriteReg(MULTIPLY_ADDR, REG_2_OFFSET, multiplicant2[loopCounter]);
 
-        // check the values in the registers
+	// check the values in the registers
 	// pull and print the results
 	printf("Multiplicant = %x\n", MULTIPLY_mReadReg(MULTIPLY_ADDR, REG_1_OFFSET));
 	printf("Multiplicant = %x\n", MULTIPLY_mReadReg(MULTIPLY_ADDR, REG_2_OFFSET));
