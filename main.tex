@@ -152,9 +152,62 @@
 
 \part{Introduction}
 
-The lab session aims at teaching students build their own IP, integrate the IP and use C to use the IP. The lab focuses on a simple hardware multiplier implementation.
+The lab session aims at teaching students build their own IP, integrate the IP into the system and use C to use the IP. The lab focuses on a simple hardware multiplier implementation and no longer uses the soft processor introduced in the previous lab.
 
 \part{Procedure}
+
+\begin{enumerate}
+    \item Create a Vivado project in a new folder. When selecting the hardware, choose \textbf{Boards} $\rightarrow$ \textbf{Zybo Z7-10}.
+    
+    \item Create a block design schematic with the \textbf{ZYNQ7 Processing System} IP added. Name the block design \textbf{Multiply}.
+    
+    \item Configure the \textbf{ZYNQ7 Processing System} IP by double clicking on it. Download the \textbf{.tcl} file provided for the lab session to the Vivado project directory. Click on \textbf{Presets} $\rightarrow$ \textbf{Apply Configuration} in the \textbf{Re-customize IP} window. Select the downloaded \textbf{.tcl} file. Uncheck all peripheral I/O pins but \textbf{UART 1} in the \textbf{Peripheral I/O Pins} tab.
+    
+    \item Click on \textbf{Tools} $\rightarrow$ \textbf{Create and Package IP} to open the \textbf{Create and Package New IP} window. Click on \textbf{Next} $\rightarrow$ \textbf{Create a new AXI4 peripheral} $\rightarrow$ \textbf{Next}.
+    
+    \item Give the IP a name and a short description. Keep the version number unchanged. Click on \textbf{Next}.
+    
+    \item Configure \textbf{Interface} according to the following table:
+    
+    \begin{table}[ht]
+    \centering
+    \begin{tabular}{@{}llll@{}}
+    \toprule
+    \begin{tabular}[c]{@{}l@{}}Interface\\ type:\end{tabular} & \begin{tabular}[c]{@{}l@{}}Interface\\ mode:\end{tabular} & \begin{tabular}[c]{@{}l@{}}Data\\ width:\end{tabular} & \begin{tabular}[c]{@{}l@{}}Number of\\ registers:\end{tabular} \\ \midrule
+    Lite                                                      & Slave                                                     & 32                                                    & 4                                                              \\ \bottomrule
+    \end{tabular}
+    \caption{New IP interface configuration}
+    \end{table}
+    
+    Check \textbf{Edit IP} and click \textbf{Finish}.
+    
+    \item Open \textbf{multiply\_v1\_0\_S00\_AXI.v} in the \textbf{source} window under \textbf{multiply\_v1\_0}. Comment out code that modifies value in \textbf{slv\_reg2}.
+    
+    \item Find the line \textbf{//Add user logic here}. Add the following code:
+    
+    \lstinputlisting[style={txt-style}]{added_Verilog.txt}
+    
+    \item Click on \textbf{Review and Package} $\rightarrow$ \textbf{Re-package} in the \textbf{Package IP} tab. Close the customized-IP project when done.
+    
+    \item Go back to the Vivado project that contains the ZYNQ processing system and Add the multiplier IP that is created. Run connection automation. Remember to select \textbf{All Automation}.
+    
+    \item Regenerate layout. The finished layout should look like the following:
+    
+    % add the screenshot here
+    
+    \item Create HDL wrapper for the block design in the source tab.
+    
+    \item Generate the bitstream.
+    
+    \item Export the design, including the bitstream.
+    
+    \item Launch the Xilinx SDK. 
+    
+\end{enumerate}
+
+% add screenshots on the arrangement of the hardware in the block diagram
+
+% add the screenshot of the picocom output
 
 \part{Results}
 
