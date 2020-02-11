@@ -79,7 +79,6 @@
 
 \usepackage{listings}
 
-% \usepackage{hyperref}
 \usepackage{chngcntr}
 \counterwithin{section}{part}
 \renewcommand\thesection{\arabic{section}}
@@ -193,14 +192,15 @@ The lab session aims at teaching students build their own IP, integrate the IP i
     
     \item Regenerate layout. The finished layout should look like the following:
     
-    % add screenshots on the arrangement of the hardware in the block diagram
-    % add the screenshot here
+    \begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{layout.png}
+    \caption{Block design for lab 3.}
+    \end{figure}
     
     \item Create HDL wrapper for the block design in the source tab.
     
-    \item Generate the bitstream.
-    
-    \item Export the design, including the bitstream.
+    \item Generate the bitstream. Export the design, including the bitstream.
     
     \item Launch the Xilinx SDK. Create a \textbf{Hello World!} type \textbf{Application Project}.
     
@@ -214,8 +214,6 @@ The lab session aims at teaching students build their own IP, integrate the IP i
     
     \verb|picocom -b 115200 /dev/ttyUSB1|
     
-    \item
-    
     \item Run the program from the Xilinx SDK.
     
     \item The output is observed from the picocom console.
@@ -228,8 +226,11 @@ The lab session aims at teaching students build their own IP, integrate the IP i
 
 The program takes one value from each of the two int arrays consecutively and use the multiplier IP to get the multiplication result of the two numbers. The result is list as the following. Note the result and the numbers are displayed in hexadecimal format.
 
-% add the screenshot here regarding the picocom console output
-% add the screenshot of the picocom output
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\textwidth]{picocom.png}
+    \caption{Picocom output.}
+    \end{figure}
 
 The multiplier handles multiplication successfully.
 
@@ -249,7 +250,7 @@ block? What is the name commonly assigned to this type of computation error, and
 you correct this? Provide a Verilog example and explain what you would change during the
 creation of the corrected peripheral.}
 
-A: Any pairs of values that yield a multiplication result that is greater than $2^31-1$. This type of computation error is known as overflow. To correct this, recall our IP has 4 registers while one of them is not used. Hence we can store the high-32 bit of our multiplication result in the 4th register and store the low-32 bit of the multiplication result in the 3rd register, assuming our multiplication result is put into a 64-bit format instead of the 32-bit form used in this lab session. The modified Verilog code will be the following:
+A: Any pairs of values that yield a multiplication result that is greater than $2^{31}-1$. This type of computation error is known as overflow. To correct this, recall our IP has 4 registers while one of them is not used. Hence we can store the high-32 bit of our multiplication result in the 4th register and store the low-32 bit of the multiplication result in the 3rd register, assuming our multiplication result is put into a 64-bit format instead of the 32-bit form used in this lab session. The modified Verilog code will be the following:
 
 \lstinputlisting[style={txt-style}]{64-bit_Verilog.txt}
 
